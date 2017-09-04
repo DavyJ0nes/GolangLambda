@@ -1,0 +1,30 @@
+---
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: 'Testing using Golang binary within AWS Lambda'
+
+Resources:
+  #############################################
+  #---------- CREATE TEST SNS TOPIC ----------#
+  #############################################
+  TesterSNSTopic:
+    Type: AWS::SNS::Topic
+    Properties:
+      DisplayName: !Sub golang-lambda-test-topic
+
+  ###################################################
+  #---------- CREATE TEST LAMBDA FUNCTION ----------#
+  ###################################################
+  GolangTester:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: index.handler
+      Runtime: nodejs4.3
+      Timeout: 10
+      Policies:
+        - arn:aws:iam::aws:policy/AWSLambdaExecute
+      Events:
+        Sns:
+          Type: SNS
+          Properties:
+            Topic: !GettAtt TesterSNSTopic
