@@ -1,3 +1,4 @@
+[![Go Report Card](https://goreportcard.com/badge/github.com/DavyJ0nes/GolangLambda)](https://goreportcard.com/report/github.com/DavyJ0nes/GolangLambda)
 # Golang Lambda
 
 ## Description
